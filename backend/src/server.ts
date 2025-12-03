@@ -14,6 +14,7 @@ const server = createServer(app);
 const defaultOrigins = [
   'http://localhost:5173',
   'http://localhost:3001',
+  'http://localhost:3002',
   'http://192.168.1.6:3001',
   'http://192.168.1.6:5173',
   'http://192.168.1.6:5174'
@@ -30,7 +31,10 @@ const io = new Server(server, {
 });
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true
+}));
 app.use(express.json());
 
 // Health check endpoint
@@ -766,6 +770,101 @@ app.get('/api/diary/trends', AuthMiddleware.authenticate, async (req: any, res) 
   } catch (error) {
     console.error('Error analyzing trends:', error);
     res.status(500).json({ error: 'Failed to analyze trends' });
+  }
+});
+
+// Assistant endpoint for diary queries
+app.post('/api/assistant/query', AuthMiddleware.authenticate, async (req: any, res) => {
+  try {
+    const { question } = req.body;
+    
+    if (!question) {
+      return res.status(400).json({ error: 'Question is required' });
+    }
+    
+    // Parse the question to understand what the user is asking about
+    const lowerQuestion = question.toLowerCase();
+    
+    // Check for diary-related queries
+    if (lowerQuestion.includes('diary') || 
+        lowerQuestion.includes('yesterday') || 
+        lowerQuestion.includes('today') ||
+        lowerQuestion.includes('week') ||
+        lowerQuestion.includes('product') ||
+        lowerQuestion.includes('exercise') ||
+        lowerQuestion.includes('workout') ||
+        lowerQuestion.includes('mood') ||
+        lowerQuestion.includes('sleep') ||
+        lowerQuestion.includes('wake')) {
+      
+      // Determine time range
+      let startDate = new Date();
+      let endDate = new Date();
+      
+      if (lowerQuestion.includes('yesterday')) {
+        startDate.setDate(startDate.getDate() - 1);
+        endDate = new Date(startDate);
+      } else if (lowerQuestion.includes('week')) {
+        startDate.setDate(startDate.getDate() - 7);
+      } else if (lowerQuestion.includes('month')) {
+        startDate.setDate(startDate.getDate() - 30);
+      }
+      
+      // Query diary data
+      if (lowerQuestion.includes('product')) {
+        const products = await diaryService.getProductUsage(req.user.userId);
+        return res.json({
+          type: 'diary_products',
+          answer: `Here are your recently used products: ${products.map((p: any) => 
+            `${p.name} (${p.rating ? `rated ${p.rating}/10` : 'no rating'})`
+          ).join(', ')}`,
+          data: products
+        });
+      }
+      
+      if (lowerQuestion.includes('exercise') || lowerQuestion.includes('workout')) {
+        const stats = await diaryService.getActivityStats(req.user.userId, startDate, endDate);
+        return res.json({
+          type: 'diary_activities',
+          answer: `Your activity summary: ${stats.totalActivities} activities, ${stats.totalCaloriesBurned} calories burned, ${stats.totalDuration} minutes of exercise.`,
+          data: stats
+        });
+      }
+      
+      if (lowerQuestion.includes('mood') || lowerQuestion.includes('sleep') || lowerQuestion.includes('wake')) {
+        const trends = await diaryService.getHealthTrends(req.user.userId, 'mood', 7);
+        return res.json({
+          type: 'diary_health',
+          answer: `Your health trends for the past week show: ${trends.summary || 'consistent patterns'}`,
+          data: trends
+        });
+      }
+      
+      // Default diary search
+      const entries = await diaryService.searchEntries(req.user.userId, question, 5);
+      return res.json({
+        type: 'diary_search',
+        answer: entries.length > 0 
+          ? `I found ${entries.length} diary entries matching your query.`
+          : 'No diary entries found matching your query.',
+        data: entries
+      });
+    }
+    
+    // For non-diary queries, search memories
+    const memories = await memoryService.searchMemories(req.user.userId, question, 5);
+    
+    res.json({
+      type: 'memory_search',
+      answer: memories.length > 0 
+        ? `I found ${memories.length} relevant memories.`
+        : 'No memories found matching your query.',
+      data: memories
+    });
+    
+  } catch (error) {
+    console.error('Error processing assistant query:', error);
+    res.status(500).json({ error: 'Failed to process query' });
   }
 });
 

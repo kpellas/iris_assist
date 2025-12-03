@@ -261,7 +261,10 @@ class ApiService {
   }
 
   async askAssistant(question: string): Promise<any> {
-    return this.processCommand(question);
+    return this.request('/api/assistant/query', {
+      method: 'POST',
+      body: JSON.stringify({ question }),
+    });
   }
 
   async syncGoogle(): Promise<any> {
