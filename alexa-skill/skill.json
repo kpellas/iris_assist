@@ -1,0 +1,69 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-AU": {
+          "name": "Kelly Assistant",
+          "summary": "Personal voice-driven automation assistant",
+          "description": "A comprehensive personal assistant that manages tasks, routines, memory, and automation through natural voice commands.",
+          "examplePhrases": [
+            "Alexa, ask Kelly Assistant to remember my calorie target is twelve hundred",
+            "Alexa, ask Kelly Assistant to start red light protocol",
+            "Alexa, ask Kelly Assistant what's my evening plan"
+          ],
+          "keywords": [
+            "personal assistant",
+            "automation",
+            "memory",
+            "tasks",
+            "routines"
+          ],
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/kelly-assistant-small.png",
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/kelly-assistant-large.png"
+        }
+      },
+      "isAvailableWorldwide": false,
+      "testingInstructions": "This is a private skill for personal use only.",
+      "category": "PRODUCTIVITY",
+      "distributionCountries": ["AU"]
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "uri": "arn:aws:lambda:ap-southeast-2:YOUR_ACCOUNT_ID:function:kelly-assistant"
+        },
+        "interfaces": [
+          {
+            "type": "ALEXA_PRESENTATION_APL",
+            "supportedViewports": [
+              {
+                "mode": "HUB",
+                "shape": "RECTANGLE",
+                "minWidth": 1024,
+                "maxWidth": 1920,
+                "minHeight": 600,
+                "maxHeight": 1080
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::alerts:timers:skill:readwrite"
+      },
+      {
+        "name": "alexa::alerts:reminders:skill:readwrite"
+      }
+    ],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "isExportCompliant": true,
+      "containsAds": false,
+      "isChildDirected": false,
+      "usesPersonalInfo": true
+    }
+  }
+}

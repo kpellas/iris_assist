@@ -1,0 +1,45 @@
+{
+  "name": "kelly-assistant-ipad",
+  "version": "1.0.0",
+  "description": "iPad interface for Kelly Assistant",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host --port 3001",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host --port 3001",
+    "start": "vite --host --port 3001",
+    "test": "vitest",
+    "lint": "eslint src --ext .ts,.tsx"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.0",
+    "@mui/material": "^5.15.0",
+    "@tanstack/react-query": "^5.13.4",
+    "axios": "^1.13.2",
+    "date-fns": "^2.30.0",
+    "framer-motion": "^10.16.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-markdown": "^9.0.0",
+    "react-router-dom": "^6.20.0",
+    "socket.io-client": "^4.8.1",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.3.27",
+    "@types/react-dom": "^18.3.7",
+    "@typescript-eslint/eslint-plugin": "^6.14.0",
+    "@typescript-eslint/parser": "^6.14.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "eslint": "^8.55.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "^5.9.3",
+    "vite": "^5.4.21",
+    "vite-plugin-pwa": "^0.17.4",
+    "vitest": "^1.0.4"
+  }
+}

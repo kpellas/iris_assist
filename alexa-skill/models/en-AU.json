@@ -1,0 +1,334 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "invocationName": "kelly assistant",
+      "intents": [
+        {
+          "name": "RememberIntent",
+          "slots": [
+            {
+              "name": "fact",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "remember {fact}",
+            "remember that {fact}",
+            "store {fact}",
+            "save {fact}",
+            "note that {fact}"
+          ]
+        },
+        {
+          "name": "RecallIntent",
+          "slots": [
+            {
+              "name": "query",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "what did I say about {query}",
+            "what do you know about {query}",
+            "recall {query}",
+            "tell me about {query}",
+            "what's my {query}"
+          ]
+        },
+        {
+          "name": "StartProtocolIntent",
+          "slots": [
+            {
+              "name": "protocolName",
+              "type": "PROTOCOL_TYPE"
+            }
+          ],
+          "samples": [
+            "start {protocolName}",
+            "begin {protocolName}",
+            "run {protocolName}",
+            "do {protocolName}",
+            "start {protocolName} protocol",
+            "start {protocolName} routine"
+          ]
+        },
+        {
+          "name": "CreateProtocolIntent",
+          "slots": [
+            {
+              "name": "protocolDefinition",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "create protocol {protocolDefinition}",
+            "create routine {protocolDefinition}",
+            "new protocol {protocolDefinition}",
+            "make a protocol for {protocolDefinition}"
+          ]
+        },
+        {
+          "name": "ShowOnIPadIntent",
+          "slots": [
+            {
+              "name": "content",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "show {content} on my iPad",
+            "display {content} on the iPad",
+            "put {content} on my screen",
+            "show me {content}",
+            "open {content} on iPad"
+          ]
+        },
+        {
+          "name": "CreateTaskIntent",
+          "slots": [
+            {
+              "name": "task",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "add task {task}",
+            "create task {task}",
+            "remind me to {task}",
+            "I need to {task}",
+            "add to my list {task}"
+          ]
+        },
+        {
+          "name": "PlanIntent",
+          "slots": [
+            {
+              "name": "planRequest",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "plan my {planRequest}",
+            "help me plan {planRequest}",
+            "what should I do for {planRequest}",
+            "suggest a plan for {planRequest}",
+            "organize my {planRequest}"
+          ]
+        },
+        {
+          "name": "DailyBriefingIntent",
+          "slots": [],
+          "samples": [
+            "what's my day look like",
+            "give me my briefing",
+            "what's on today",
+            "daily update",
+            "morning briefing",
+            "what should I do today"
+          ]
+        },
+        {
+          "name": "WoolworthsIntent",
+          "slots": [
+            {
+              "name": "action",
+              "type": "WOOLIES_ACTION"
+            }
+          ],
+          "samples": [
+            "prepare my Woolies order",
+            "setup Woolworths cart",
+            "add to Woolies {action}",
+            "check Woolworths {action}",
+            "order from Woolies"
+          ]
+        },
+        {
+          "name": "GeneralQueryIntent",
+          "slots": [
+            {
+              "name": "query",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "{query}"
+          ]
+        },
+        {
+          "name": "SearchDriveIntent",
+          "slots": [
+            {
+              "name": "query",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "search my drive for {query}",
+            "find {query} in my documents",
+            "look for {query} in Google Drive",
+            "search for {query} in my files",
+            "find my {query} document"
+          ]
+        },
+        {
+          "name": "CreateDocumentIntent",
+          "slots": [
+            {
+              "name": "title",
+              "type": "AMAZON.SearchQuery"
+            },
+            {
+              "name": "content",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "create a document called {title}",
+            "make a new document named {title}",
+            "create a document {title} with {content}",
+            "start a new document {title}"
+          ]
+        },
+        {
+          "name": "CheckEmailIntent",
+          "slots": [],
+          "samples": [
+            "check my email",
+            "do I have any new emails",
+            "read my emails",
+            "what emails do I have",
+            "check my Gmail"
+          ]
+        },
+        {
+          "name": "SearchEmailIntent",
+          "slots": [
+            {
+              "name": "query",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "search my email for {query}",
+            "find emails about {query}",
+            "look for {query} in my inbox",
+            "search Gmail for {query}"
+          ]
+        },
+        {
+          "name": "SendEmailIntent",
+          "slots": [
+            {
+              "name": "recipient",
+              "type": "AMAZON.SearchQuery"
+            },
+            {
+              "name": "subject",
+              "type": "AMAZON.SearchQuery"
+            },
+            {
+              "name": "body",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "send an email to {recipient}",
+            "email {recipient} about {subject}",
+            "send {recipient} an email saying {body}",
+            "compose an email to {recipient}"
+          ]
+        },
+        {
+          "name": "ReadEmailFromIntent",
+          "slots": [
+            {
+              "name": "sender",
+              "type": "AMAZON.SearchQuery"
+            }
+          ],
+          "samples": [
+            "read emails from {sender}",
+            "what did {sender} send me",
+            "check emails from {sender}",
+            "show me emails from {sender}"
+          ]
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        }
+      ],
+      "types": [
+        {
+          "name": "PROTOCOL_TYPE",
+          "values": [
+            {
+              "name": {
+                "value": "red light"
+              }
+            },
+            {
+              "name": {
+                "value": "skincare"
+              }
+            },
+            {
+              "name": {
+                "value": "morning routine"
+              }
+            },
+            {
+              "name": {
+                "value": "evening routine"
+              }
+            },
+            {
+              "name": {
+                "value": "workout"
+              }
+            },
+            {
+              "name": {
+                "value": "zwift"
+              }
+            }
+          ]
+        },
+        {
+          "name": "WOOLIES_ACTION",
+          "values": [
+            {
+              "name": {
+                "value": "cart"
+              }
+            },
+            {
+              "name": {
+                "value": "order"
+              }
+            },
+            {
+              "name": {
+                "value": "price"
+              }
+            },
+            {
+              "name": {
+                "value": "delivery"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

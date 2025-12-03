@@ -1,0 +1,4 @@
+# See SECURITY_IMPROVEMENTS.md for security notes
+# Security-related local state
+/.tokens.encrypted
+*.zip
